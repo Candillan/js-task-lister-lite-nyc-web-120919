@@ -1,13 +1,19 @@
 document.addEventListener("DOMContentLoaded", () => {
   // your code here
   document.getElementById('create-task-form').addEventListener("submit", createNewTask);
+  // const deleteButton = document.getElementById("delete")
 });
-
-const createNewTask = (event) => {
+function createNewTask(event){
   event.preventDefault()
   const createNewDescription = document.getElementById('new-task-description')
   const createLi = document.createElement('li')
-  createLi.innerText = createNewDescription.value
+  createLi.innerHTML = `${createNewDescription.value} <button class="delete">&times;</button>`
+  
+  const deleteButton = createLi.getElementsByClassName("delete")[0]
+  deleteButton.addEventListener("click", function(e){
+    createLi.remove()
+  });
+  console.log(deleteButton)
   appendNewTask(createLi)
   event.target.reset()
 }
@@ -17,8 +23,14 @@ const appendNewTask = (task) => {
 }
 
 
+// let deleteButtons = Array.from(document.getElementsByClassName('delete'))
 
-
+// deleteButtons.forEach(function(button){
+//   button.addEventListener("click", function(event) {
+//     let li = event.target.parentNode
+//     li.remove()
+//   })
+// })
 
 //button is clicked
 //read what was in the text box
